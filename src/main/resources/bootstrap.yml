@@ -1,1 +1,50 @@
+app:
+  eureka: 8761
+  logging: debug
+  port: 8080
+
+server:
+  port: ${app.port}
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://eureka:@eureka-service:${app.eureka}/eureka
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: core-service
+          uri: lb://core-service
+          predicates:
+            - Path=/api/core/**
+        - id: articulo-service
+          uri: lb://articulo-service
+          predicates:
+            - Path=/api/articulo/**
+        - id: report-service
+          uri: lb://report-service
+          predicates:
+            - Path=/api/report/**
+        - id: pyafipws-service
+          uri: lb://pyafipws-service
+          predicates:
+            - Path=/api/afipws/**
+
+logging:
+  level:
+    com.pys.gateway: ${app.logging}
+    web: ${app.logging}
+    org:
+      springframework.cloud.config: ${app.logging}
 
