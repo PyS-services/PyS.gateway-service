@@ -1,7 +1,7 @@
 app:
   eureka: 8761
   logging: debug
-  port: 8080
+  port: 8094
 
 server:
   port: ${app.port}
