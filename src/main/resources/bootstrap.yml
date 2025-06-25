@@ -21,26 +21,28 @@ spring:
     name: ${app.name}
   cloud:
     gateway:
-      discovery:
-        locator:
-          enabled: true
-      routes:
-        - id: core-service
-          uri: lb://core-service
-          predicates:
-            - Path=/api/core/**
-        - id: common-service
-          uri: lb://common-service
-          predicates:
-            - Path=/api/common-service/**
-        - id: report-service
-          uri: lb://report-service
-          predicates:
-            - Path=/api/report/**
-        - id: pyafipws-service
-          uri: lb://pyafipws-service
-          predicates:
-            - Path=/api/afipws/**
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: true
+          routes:
+            - id: core-service
+              uri: lb://core-service
+              predicates:
+                - Path=/api/core/**
+            - id: common-service
+              uri: lb://common-service
+              predicates:
+                - Path=/api/common-service/**
+            - id: report-service
+              uri: lb://report-service
+              predicates:
+                - Path=/api/report/**
+            - id: pyafipws-service
+              uri: lb://pyafipws-service
+              predicates:
+                - Path=/api/afipws/**
 
 logging:
   level:
@@ -48,6 +50,17 @@ logging:
     web: ${app.logging}
     org:
       springframework.cloud.config: ${app.logging}
+      springframework.cloud.gateway: ${app.logging}
+      springframework.web: ${app.logging}
+      springframework.http: ${app.logging}
+      springframework.web.reactive: ${app.logging}
+      springframework.web.server: ${app.logging}
+      springframework.boot.actuate: ${app.logging}
+      springframework.cloud.netflix: ${app.logging}
+      springframework.cloud.loadbalancer: ${app.logging}
+    reactor:
+      netty: ${app.logging}
+    netty: ${app.logging}
 
 management:
   endpoints:

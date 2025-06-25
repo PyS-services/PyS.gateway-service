@@ -20,8 +20,8 @@ PyS.gateway-service is a Spring Cloud Gateway service that acts as the entry poi
 - Java 24
 - Maven 3.8+
 - Docker (optional)
-- Spring Cloud 2024.0.1
-- Spring Boot 3.4.4
+- Spring Cloud 2025.0.0
+- Spring Boot 3.5.3
 
 ## Getting Started
 
